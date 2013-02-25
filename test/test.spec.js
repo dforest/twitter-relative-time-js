@@ -23,7 +23,7 @@
   }
 
   beforeEach(function(){
-    current_date = new Date(1986, 7, 5, 3, 5, 15); //My birthday :D
+    current_date = new Date(1986, 7-1, 5, 3, 5, 15); //My birthday :D
   });
 
   it("should convert to 'now' until a second ago", function(){

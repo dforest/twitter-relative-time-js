@@ -1,5 +1,5 @@
 /**
- * twitter.relative.time.js 0.1.1
+ * twitter.relative.time.js 0.1.2
  * Copyright (c) 2013 Keita Mori
  * https://github.com/dforest/twitter-relative-time-js
  *
@@ -44,9 +44,9 @@
 
   var localize = function(date){
     if(locale === 'ja'){
-      return [t('month')[date.getMonth() - 1], date.getDate(), t('day')].join('');
+      return [t('month')[date.getMonth()], date.getDate(), t('day')].join('');
     }
-    return [date.getDate(), t('month')[date.getMonth() - 1]].join(' ');
+    return [date.getDate(), t('month')[date.getMonth()]].join(' ');
   };
 
   var CONVERSIONS = {
