@@ -8,6 +8,8 @@ Convert Date to relative time the twitter display requirements with javascript
 
 When using the plugin, you must first include `twitter.relative.time.js`.
 
+And just do below:
+
 ```js
 new Date().toTwitterRelativeTime()
 //=> 7s (for 7 seconds ago)
