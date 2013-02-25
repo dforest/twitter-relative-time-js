@@ -1,6 +1,5 @@
 /**
- * twitter.relative.time.js
- * Version 0.1.0
+ * twitter.relative.time.js 0.1.1
  * Copyright (c) 2013 Keita Mori
  * https://github.com/dforest/twitter-relative-time-js
  *
@@ -27,14 +26,15 @@
       delta = delta / CONVERSIONS[key];
     }
 
-    if (delta/24 < 1) {
-      delta = Math.floor(delta);
-      if (units === t('now')) { delta = ''; }
-      else if (delta !== 1) { units += t('prural'); }
-      return [delta, units, units !== t('now') ? t('ago') : ''].join(t('spacing'));
+    if (units === t('hour') && delta/24 >= 1) {
+      //older than 24 hours
+      return localize(this);
     }
 
-    return localize(this);
+    delta = Math.floor(delta);
+    if (units === t('now')) { delta = ''; }
+    else if (delta !== 1) { units += t('prural'); }
+    return [delta, units, units !== t('now') ? t('ago') : ''].join(t('spacing'));
 
   };
 
@@ -44,9 +44,9 @@
 
   var localize = function(date){
     if(locale === 'ja'){
-      return [t('month')[date.getMonth()], date.getDate(), t('day')].join('');
+      return [t('month')[date.getMonth() - 1], date.getDate(), t('day')].join('');
     }
-    return [date.getDate(), t('month')[date.getMonth()]].join(' ');
+    return [date.getDate(), t('month')[date.getMonth() - 1]].join(' ');
   };
 
   var CONVERSIONS = {
