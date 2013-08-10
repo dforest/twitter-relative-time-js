@@ -34,7 +34,7 @@
     delta = Math.floor(delta);
     if (units === t('now')) { delta = ''; }
     else if (delta !== 1) { units += t('prural'); }
-    return [delta, units, units !== t('now') ? t('ago') : ''].join(t('spacing'));
+    return [delta, units, this < now ? t('ago') : ''].join(t('spacing'));
 
   };
 
