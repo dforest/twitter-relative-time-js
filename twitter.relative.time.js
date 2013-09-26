@@ -18,23 +18,21 @@
     var delta = now - this;
     delta = Math.abs(delta);
 
-    var units = t('now');
+    var unit_key = 'now';
     for (var key in CONVERSIONS) {
       if (delta < CONVERSIONS[key])
         break;
-      units = t(key);
+      unit_key = key;
       delta = delta / CONVERSIONS[key];
     }
 
-    if (units === t('hour') && delta/24 >= 1) {
+    if (unit_key === 'hour' && delta/24 >= 1) {
       //older than 24 hours
-      return localize(this);
+      return localize(this, 'month', true);
     }
 
     delta = Math.floor(delta);
-    if (units === t('now')) { delta = ''; }
-    else if (delta !== 1) { units += t('prural'); }
-    return [delta, units, this < now ? t('ago') : ''].join(t('spacing'));
+    return localize(delta, unit_key, this < now);
 
   };
 
@@ -42,11 +40,24 @@
     return LOCALES[locale][key];
   };
 
-  var localize = function(date){
-    if(locale === 'ja'){
-      return [t('month')[date.getMonth()], date.getDate(), t('day')].join('');
+  var localize = function(delta, unit_key, is_past){
+    if(unit_key === 'month'){
+
+      if(locale === 'ja'){
+        return [t('month')[delta.getMonth()], delta.getDate(), t('day')].join('');
+      }
+      return [delta.getDate(), t('month')[delta.getMonth()]].join(' ');
+
+    }else if (unit_key === 'now'){
+
+      return t(unit_key);
+
+    }else{
+
+      var unit = delta === 1 ? t(unit_key)['one'] : t(unit_key)['other'];
+      return [delta, unit, is_past ? t('ago') : ''].join(t('spacing'));
+
     }
-    return [date.getDate(), t('month')[date.getMonth()]].join(' ');
   };
 
   var CONVERSIONS = {
@@ -57,35 +68,32 @@
   };
   var LOCALES = {
     def: {
-      prural: '',
       spacing: '',
       ago: '',
       now: 'Now',
-      second: 's',
-      minute: 'm',
-      hour:   'h',
+      second: {one: 's', other: 's'},
+      minute: {one: 'm', other: 'm'},
+      hour:   {one: 'h', other: 'h'},
       day: '',
       month: ['Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec']
     },
     en: {
-      prural: 's',
       spacing: ' ',
       ago: 'ago',
       now: 'Now',
-      second: 'second',
-      minute: 'minute',
-      hour:   'hour',
+      second: {one: 'second', other: 'seconds'},
+      minute: {one: 'minute', other: 'minutes'},
+      hour:   {one: 'hour'  , other: 'hours'},
       day: '',
       month: ['January','February','March','April','May','June','July','August','September','Octover','November','December']
     },
     ja: {
-      prural: '',
       spacing: '',
       ago: '前',
       now: '今',
-      second: '秒',
-      minute: '分',
-      hour:   '時間',
+      second: {one: '秒', other: '秒'},
+      minute: {one: '分', other: '分'},
+      hour:   {one: '時間', other: '時間'},
       day: '日',
       month: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
     }
