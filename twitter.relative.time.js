@@ -32,7 +32,7 @@
     }
 
     delta = Math.floor(delta);
-    return localize(delta, unit_key, this < now);
+    return localize(delta, unit_key);
 
   };
 
@@ -40,24 +40,15 @@
     return LOCALES[locale][key];
   };
 
-  var localize = function(delta, unit_key, is_past){
+  var localize = function(delta, unit_key){
+    var unit = t(unit_key)
     if(unit_key === 'month'){
-
-      if(locale === 'ja'){
-        return [t('month')[delta.getMonth()], delta.getDate(), t('day')].join('');
-      }
-      return [delta.getDate(), t('month')[delta.getMonth()]].join(' ');
-
-    }else if (unit_key === 'now'){
-
-      return t(unit_key);
-
-    }else{
-
-      var unit = delta === 1 ? t(unit_key)['one'] : t(unit_key)['other'];
-      return [delta, unit, is_past ? t('ago') : ''].join(t('spacing'));
-
+      unit = unit[delta.getMonth()];
+      delta = delta.getDate();
+    }else if(unit_key !== 'now'){
+      unit = delta === 1 ? t(unit_key)['one'] : t(unit_key)['other'];
     }
+    return unit.replace('%n', delta+"");
   };
 
   var CONVERSIONS = {
@@ -68,34 +59,26 @@
   };
   var LOCALES = {
     def: {
-      spacing: '',
-      ago: '',
       now: 'Now',
-      second: {one: 's', other: 's'},
-      minute: {one: 'm', other: 'm'},
-      hour:   {one: 'h', other: 'h'},
-      day: '',
-      month: ['Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec']
+      second: {one: '%ns', other: '%ns'},
+      minute: {one: '%nm', other: '%nm'},
+      hour:   {one: '%nh', other: '%nh'},
+      month: ['%n Jan','%n Feb','%n Mar','%n Apr','%n May','%n June','%n July','%n Aug','%n Sept','%n Oct','%n Nov','%n Dec']
     },
     en: {
-      spacing: ' ',
-      ago: 'ago',
       now: 'Now',
-      second: {one: 'second', other: 'seconds'},
-      minute: {one: 'minute', other: 'minutes'},
-      hour:   {one: 'hour'  , other: 'hours'},
+      second: {one: '%n second ago', other: '%n seconds ago'},
+      minute: {one: '%n minute ago', other: '%n minutes ago'},
+      hour:   {one: '%n hour ago'  , other: '%n hours ago'},
       day: '',
-      month: ['January','February','March','April','May','June','July','August','September','Octover','November','December']
+      month: ['%n January','%n February','%n March','%n April','%n May','%n June','%n July','%n August','%n September','%n Octover','%n November','%n December']
     },
     ja: {
-      spacing: '',
-      ago: '前',
       now: '今',
-      second: {one: '秒', other: '秒'},
-      minute: {one: '分', other: '分'},
-      hour:   {one: '時間', other: '時間'},
-      day: '日',
-      month: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+      second: {one: '%n秒前', other: '%n秒前'},
+      minute: {one: '%n分前', other: '%n分前'},
+      hour:   {one: '%n時間前', other: '%n時間前'},
+      month: ['1月%n日','2月%n日','3月%n日','4月%n日','5月%n日','6月%n日','7月%n日','8月%n日','9月%n日','10月%n日','11月%n日','12月%n日']
     }
   }
 
