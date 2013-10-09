@@ -66,12 +66,28 @@
     expect(past2.toTwitterRelativeTime()).toEqual('3 July');
   });
 
-    it("should convert to 'X月X日' older than 24 hours if Japanese", function(){
+  it("should convert to 'X月X日' older than 24 hours if Japanese", function(){
     var past1 = past_date(_['day']);
     var past2 = past_date(_['day']*2);
     spy();
     expect(past1.toTwitterRelativeTime('ja')).toEqual('7月4日');
     expect(past2.toTwitterRelativeTime('ja')).toEqual('7月3日');
+  });
+
+  it("should convert to 'X月X日' older than 24 hours if Arabic", function(){
+    var past1 = past_date(_['day']);
+    var past2 = past_date(_['day']*2);
+    spy();
+    expect(past1.toTwitterRelativeTime('ar')).toEqual('4 يوليو');
+    expect(past2.toTwitterRelativeTime('ar')).toEqual('3 يوليو');
+  });
+
+  it("should convert to 'X月X日' older than 24 hours if Chinese", function(){
+    var past1 = past_date(_['day']);
+    var past2 = past_date(_['day']*2);
+    spy();
+    expect(past1.toTwitterRelativeTime('zh-CHS')).toEqual('7月4日');
+    expect(past2.toTwitterRelativeTime('zh-CHS')).toEqual('7月3日');
   });
 
  });
