@@ -70,7 +70,7 @@
       second: {one: '%n second ago', other: '%n seconds ago'},
       minute: {one: '%n minute ago', other: '%n minutes ago'},
       hour:   {one: '%n hour ago'  , other: '%n hours ago'},
-      month: ['%n January','%n February','%n March','%n April','%n May','%n June','%n July','%n August','%n September','%n Octover','%n November','%n December']
+      month: ['%n January','%n February','%n March','%n April','%n May','%n June','%n July','%n August','%n September','%n October','%n November','%n December']
     },
     ja: {
       now: '今',
