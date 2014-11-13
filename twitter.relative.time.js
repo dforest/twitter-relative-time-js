@@ -1,5 +1,5 @@
 /**
- * twitter.relative.time.js 0.2.0
+ * twitter.relative.time.js 0.2.1
  * Copyright (c) 2013 Keita Mori
  * https://github.com/dforest/twitter-relative-time-js
  *
@@ -135,7 +135,7 @@
       hour: {one: "%n시간 전", other: "%n시간 전"},
       month: ["1월%n일","2월%n일","3월%n일","4월%n일","5월%n일","6월%n일","7월%n일","8월%n일","9월%n일","10월%n일","11월%n일","12월%n일"]
     },
-        ms: {
+    ms: {
       now: "sekarang",
       second: {one: "%n saat yang lalu", other: "%n saat yang lalu"},
       minute: {one: "%n minit yang lalu", other: "%n minit yang lalu"},
@@ -163,11 +163,18 @@
       hour: {one: "%n saat önce", other: "%n saat önce"},
       month: ["%n Ocak","%n Şubat","%n Mart","%n Nisan","%n Mayıs","%n Haziran","%n Temmuz","%n Ağustos","%n Eylül","%n Ekim","%n Kasım","%n Aralık"]
     },
-    'zh-CHS': {
+    'zh-CN': {
       now: "现在",
       second: {one: "%n秒钟前", other: "%n秒钟前"},
       minute: {one: "%n分钟前", other: "%n分钟前"},
       hour: {one: "%n小时前", other: "%n小时前"},
+      month: ["1月%n日","2月%n日","3月%n日","4月%n日","5月%n日","6月%n日","7月%n日","8月%n日","9月%n日","10月%n日","11月%n日","12月%n日"]
+    },
+    'zh-TW': {
+      now: "現在",
+      second: {one: "%n秒鐘前", other: "%n秒鐘前"},
+      minute: {one: "%n分鐘前", other: "%分鐘前"},
+      hour: {one: "%n小時前", other: "%n小時前"},
       month: ["1月%n日","2月%n日","3月%n日","4月%n日","5月%n日","6月%n日","7月%n日","8月%n日","9月%n日","10月%n日","11月%n日","12月%n日"]
     }
   }
