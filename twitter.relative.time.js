@@ -9,7 +9,7 @@
  *
  * Released under the MIT License.
  */
- Date.prototype.toTwitterRelativeTime = (function() {
+Date.prototype.toTwitterRelativeTime = (function() {
   var locale = 'def';
 
   var _ = function(locale_key) {
